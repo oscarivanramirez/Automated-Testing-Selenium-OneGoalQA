@@ -58,7 +58,7 @@ async function fillAddressFormExceptState(street, city, zip, phoneNumber) {
     await driver.findElement(By.id('address-ui-widgets-enterAddressPostalCode')).sendKeys(zip);
     await driver.findElement(By.id('address-ui-widgets-enterAddressPhoneNumber')).sendKeys(phoneNumber);
 
-    console.log('youre ready to add state');
+    console.log('Youre ready to add state');
 }
 
 async function selectStateDropdown(stateValue) {
@@ -89,20 +89,20 @@ async function clickAddAddressButton() {
     await addButton.click();
 
     console.log('after clicking the Add Address button');
-    await driver.sleep(3000); // Pauses for 2 seconds for visual verification
+    await driver.sleep(3000); // Pauses for 3 seconds for visual verification
 
 }
 
 
 
-async function assertAddressAdded(expectedAddressLine, expectedPhoneNumber) {
+async function assertAddressAdded(expectedAddressLine) {
     await driver.wait(until.elementLocated(By.id('address-ui-widgets-AddressLineOne')), 10000);
     const addressElements = await driver.findElements(By.id('address-ui-widgets-AddressLineOne'));
 
     // Convert expected values to lowercase for case-insensitive comparison
     const expectedAddressLineLower = expectedAddressLine.toLowerCase();
 
-    // Check if any address and phone number matches the expected ones
+    // Check if any address matches the expected ones
     let addressFound = false;
     for (let i = 0; i < addressElements.length; i++) {
         const addressText = await addressElements[i].getText();
@@ -113,7 +113,7 @@ async function assertAddressAdded(expectedAddressLine, expectedPhoneNumber) {
         }
     }
 
-    // Assert that the address and phone number were found
+    // Assert that the address was found
     assert(addressFound, 'The expected address were not found in the list');
     console.log('Assertion passed: You added new address in');
 
@@ -126,7 +126,7 @@ async function addAddressToAmazon() {
         await fillAddressFormExceptState('10237 47th Ave', 'Corona', '11368', '6465059863');
         await selectStateDropdown('NY');
         await clickAddAddressButton();
-        await assertAddressAdded('10237 47th Ave', '6465059863');
+        await assertAddressAdded('10237 47th Ave');
     } finally {
         await driver.quit();
     }

@@ -44,7 +44,6 @@ async function amazonLoginTest() {
         assert.strictEqual(isAccountNameVisible, true, 'Account name is not visible, login might have failed');
         console.log('Assertion passed: You are logged in');
 
-        // Additional steps to verify successful login can be implemented here
 
     } catch (error) {
         console.error('Error occurred:', error);

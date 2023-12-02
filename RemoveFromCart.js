@@ -39,7 +39,6 @@ async function removeFromCart() {
         const deleteButtonSelector = By.css(`div[data-asin="${asin}"] input[data-action="delete"]`);
         const deleteButton = await driver.findElement(deleteButtonSelector);
         await deleteButton.click();
-        console.log('helllo')
         await driver.sleep(3000); // Replace with dynamic wait if possible
 
         // Wait for the cart to show the empty message
